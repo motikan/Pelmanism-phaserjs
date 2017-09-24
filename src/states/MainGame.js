@@ -6,9 +6,9 @@ let numCols = 5;
 let tileSpacing = 10;
 let timeLeft;
 let tilesArray = [];
-let selectedArray = [];
-let playSound;
-let score;
+let selectedArray;  // 選択した画像
+let playSound;  // 音の有無
+let score;  // スコア
 let soundArray = [];
 let scoreText;
 let timeText;
@@ -20,6 +20,8 @@ export default class extends Phaser.State {
         playSound = _playSound;
         timeLeft = 20;
         stopFlag = false;
+        selectedArray = [];
+        console.log(selectedArray);
     }
 
     preload () {
@@ -71,16 +73,16 @@ export default class extends Phaser.State {
             fill: "#00ff00",
             align: "center"
         };
-        scoreText = this.add.text(5, 5, "Score: " + score, style);
+        scoreText = this.add.text(5, 5, "スコア: " + score, style);
 
-        timeText = this.add.text(5, this.stage.height, "Time left: " + timeLeft, style);
+        timeText = this.add.text(5, this.stage.height, "残り時間: " + timeLeft, style);
         timeText.anchor.set(0, 1);
         this.time.events.loop(Phaser.Timer.SECOND, this.decreaseTime, this);
     }
 
     decreaseTime(){
         timeLeft--;
-        timeText.text = "Time left: " + timeLeft;
+        timeText.text = "残り時間: " + timeLeft;
 
         if (timeLeft === 0) {
             let clearWorld = true;
@@ -113,7 +115,7 @@ export default class extends Phaser.State {
                 soundArray[1].play();
             }
             score++;
-            scoreText.text = "Score: " + score;
+            scoreText.text = "スコア: " + score;
             selectedArray[0].destroy();
             selectedArray[1].destroy();
         } else{
@@ -123,7 +125,7 @@ export default class extends Phaser.State {
             selectedArray[0].frame = 10;
             selectedArray[1].frame = 10;
         }
-        selectedArray.length = 0;
+        selectedArray = [];
         stopFlag = false;
     }
 
