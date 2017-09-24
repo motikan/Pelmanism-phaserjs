@@ -18,7 +18,7 @@ export default class extends Phaser.State {
             fill: "#00ff00",
             align: "center"
         };
-        let text = this.add.text(this.stage.width / 2, this.stage.height / 2 - 100, "Crack Alien Code", style);
+        let text = this.add.text(this.stage.width / 2, this.stage.height / 2 - 100, "Kill-Me-Baby Pelmanism", style);
         text.anchor.set(0.5);
         let soundButton = this.add.button(this.stage.width / 2 - 100, this.stage.height / 2 + 100, "soundicon", this.startGame, this);
         soundButton.anchor.set(0.5);

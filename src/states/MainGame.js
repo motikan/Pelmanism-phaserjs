@@ -12,12 +12,13 @@ let score;
 let soundArray = [];
 let scoreText;
 let timeText;
+let stopFlag = false;
 
 export default class extends Phaser.State {
 
     init (_playSound) {
         playSound = _playSound;
-        timeLeft = 3;
+        timeLeft = 20;
     }
 
     preload () {
@@ -96,13 +97,17 @@ export default class extends Phaser.State {
             selectedArray.push(target);
         }
 
-        if(selectedArray.length === 2){
+        // ２枚選択済み
+        if(selectedArray.length === 2 && stopFlag === false){
+            stopFlag = true;
             this.time.events.add(Phaser.Timer.SECOND, this.checkTiles, this);
         }
     }
 
+    // 選択画像の検証
     checkTiles(){
         if(selectedArray[0].value === selectedArray[1].value){
+            // 同じ画像を選択
             if(playSound){
                 soundArray[1].play();
             }
@@ -118,6 +123,7 @@ export default class extends Phaser.State {
             selectedArray[1].frame = 10;
         }
         selectedArray.length = 0;
+        stopFlag = false;
     }
 
 }
