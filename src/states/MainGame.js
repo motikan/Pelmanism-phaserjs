@@ -12,13 +12,14 @@ let score;
 let soundArray = [];
 let scoreText;
 let timeText;
-let stopFlag = false;
+let stopFlag;
 
 export default class extends Phaser.State {
 
     init (_playSound) {
         playSound = _playSound;
         timeLeft = 20;
+        stopFlag = false;
     }
 
     preload () {
